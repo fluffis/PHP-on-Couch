@@ -455,6 +455,10 @@ class CouchAdmin
             throw new InvalidArgumentException("Login can't be empty");
         }
         $sec = $this->getSecurity();
+	if (!property_exists($sec->members, 'names')) {
+	    $sec->members->names = [];
+	}
+	    
         if (in_array($login, $sec->members->names)) {
             return true;
         }
@@ -479,6 +483,9 @@ class CouchAdmin
             throw new InvalidArgumentException("Login can't be empty");
         }
         $sec = $this->getSecurity();
+	if (!property_exists($sec->admins, 'names')) {
+	    $sec->admins->names = [];
+	}
         if (in_array($login, $sec->admins->names)) {
             return true;
         }
@@ -525,6 +532,9 @@ class CouchAdmin
             throw new InvalidArgumentException("Login can't be empty");
         }
         $sec = $this->getSecurity();
+	if (!property_exists($sec->members, 'names')) {
+	    return true;
+	}
         if (!in_array($login, $sec->members->names)) {
             return true;
         }
@@ -549,6 +559,9 @@ class CouchAdmin
             throw new InvalidArgumentException("Login can't be empty");
         }
         $sec = $this->getSecurity();
+	if (!property_exists($sec->admins, 'names')) {
+	    return true;
+	}
         if (!in_array($login, $sec->admins->names)) {
             return true;
         }
